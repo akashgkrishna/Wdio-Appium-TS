@@ -1,4 +1,4 @@
-# IssueTagTracker IntelliJ Plugin  
+# WDIO-Appium-Typescript 
   
 ## Description
 
