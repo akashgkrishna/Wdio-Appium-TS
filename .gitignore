@@ -33,4 +33,4 @@ npm-debug.log*
 package-lock.json
 
 # apk file
-.apk
+*.apk
