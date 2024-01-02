@@ -1,16 +1,16 @@
-import LeftPanelPage from './common/LeftPanel';
+import {LeftPanel } from './common/LeftPanel';
 
-class LoginScreen {
+export class LoginScreen {
     private selectors = {
         loginCred: '//android.widget.TextView[@text="bob@example.com"]',
         loginButton: '~Login button',
         goShoppingButton: '//android.widget.TextView[@text="Go Shopping"]'
     };
 
-    private leftPanel: LeftPanelPage;
+    private leftPanel: LeftPanel;
 
     constructor() {
-        this.leftPanel = new LeftPanelPage();
+        this.leftPanel = new LeftPanel();
     }
 
     async enterLoginCredentials() {
@@ -40,5 +40,3 @@ class LoginScreen {
         return await goShoppingButton.isDisplayed();
     }
 }
-
-export default LoginScreen;

@@ -1,4 +1,4 @@
-class LeftPanel {
+export class LeftPanel {
     private selectors = {
         menuButton: '//android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView',
         loginMenuButton: '~menu item log in'
@@ -14,5 +14,3 @@ class LeftPanel {
         await loginMenuButton.click();
     }
 }
-
-export default LeftPanel;

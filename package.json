@@ -11,6 +11,9 @@
     "wdio-wait-for": "^3.0.10"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "test": "npm run wdio && npm run allure",
+    "single": "wdio run ./wdio.conf.ts --spec test/spec/login/positiveLogin.test.ts",
+    "allure": "allure generate --clean ./allure-results && allure open"
   }
 }
