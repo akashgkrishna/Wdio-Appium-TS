@@ -1,42 +1,65 @@
+import { BaseScreen } from './base/baseScreen';
 import {LeftPanel } from './common/LeftPanel';
+import { XpathUtil } from './common/xpathUtil';
 
-export class LoginScreen {
+export class LoginScreen extends BaseScreen{
     private selectors = {
         loginCred: '//android.widget.TextView[@text="bob@example.com"]',
         loginButton: '~Login button',
-        goShoppingButton: '//android.widget.TextView[@text="Go Shopping"]'
+        goShoppingButton: '//android.widget.TextView[@text="Go Shopping"]',
+        userNameTextField: '~Username input field',
+        passwordTextField: '~Password input field',
+        errorMessageText: '//android.widget.TextView[@text="##PLACEHOLDER##"]'
     };
 
-    private leftPanel: LeftPanel;
+    private leftPanel: LeftPanel = new LeftPanel;
 
-    constructor() {
-        this.leftPanel = new LeftPanel();
+
+    async getErrorMessageText(selector: string, value: string): Promise<string>{
+        return XpathUtil.getPlaceholderReplaced(selector,value );
     }
-
     async enterLoginCredentials() {
-        const loginCred = $(this.selectors.loginCred);
-        await loginCred.click();
+        await this.click(this.selectors.loginCred);
     }
 
-    async clickSubmitLogin() {
-        const loginButton = $(this.selectors.loginButton);
-        await loginButton.click();
+    async clickOnLoginButton() {
+        await this.click(this.selectors.loginButton);
     }
 
     async performLogin() {
         await this.leftPanel.clickMenuButton();
         await this.leftPanel.clickLoginMenuButton();
         await this.enterLoginCredentials();
-        await this.clickSubmitLogin();
+        await this.clickOnLoginButton();
     }
 
     async clickGoShoppingButton() {
-        const goShoppingButton = $(this.selectors.goShoppingButton);
-        await goShoppingButton.click();
+        await this.click(this.selectors.goShoppingButton);
     }
 
     async isGoShoppingButtonDisplayed() {
-        const goShoppingButton = $(this.selectors.goShoppingButton);
-        return await goShoppingButton.isDisplayed();
+        return await this.isDisplayed(this.selectors.goShoppingButton);
+    }
+
+    async enterUserName(userName: string) {
+        await this.setValue(this.selectors.userNameTextField, userName);
+    }
+
+    async enterPassword(password: string) {
+        await this.setValue(this.selectors.passwordTextField, password);
+    }
+
+    async enterInvalidCredentials(userName: string, password: string){
+        await this.leftPanel.clickMenuButton();
+        await this.leftPanel.clickLoginMenuButton();
+        await this.enterUserName(userName);
+        await this.enterPassword(password);
+        await this.clickOnLoginButton();
+    }
+
+    async isErrorMessageDisplayed(value: string): Promise<boolean>{
+        const element = this.getErrorMessageText(this.selectors.errorMessageText, value);
+        return await this.isDisplayed(await element);
+
     }
 }

@@ -2,15 +2,14 @@ import { LoginScreen }from '../../screens/loginScreen';
 import { LeftPanel }from '../../screens/common/LeftPanel';
 
 let loginScreen: LoginScreen;
-    let leftPanel: LeftPanel;
-
-before(async function () {
-    loginScreen = new LoginScreen();
-    leftPanel = new LeftPanel();
-});
+let leftPanel: LeftPanel;
 
 describe('Login to app', function () {
-    
+    before(async function () {
+        loginScreen = new LoginScreen();
+        leftPanel = new LeftPanel();
+    });
+
     it('Login with valid credentials', async function () {
         await loginScreen.performLogin();
 
