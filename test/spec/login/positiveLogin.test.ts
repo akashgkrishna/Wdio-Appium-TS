@@ -22,5 +22,6 @@ describe('Login to app', function () {
         const isButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
         expect(isButtonDisplayed).toBe(true);
     });
+
 });
 

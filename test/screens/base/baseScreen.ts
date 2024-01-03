@@ -10,7 +10,7 @@ export class BaseScreen {
         return await element.isDisplayed();
     }
 
-    protected async setValue(selector: string, value: string){
+    protected async setValue(selector: string, value: any){
         const element = $(selector);
         await element.click();
         await element.setValue(value);
