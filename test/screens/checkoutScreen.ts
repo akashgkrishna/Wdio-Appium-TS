@@ -1,4 +1,5 @@
 import { CardDetails } from "../customTypes/cardDetails";
+import { TouchActions } from "../gestures/touchActions";
 import { BaseScreen } from "./base/baseScreen";
 
 export class CheckoutScreen extends BaseScreen{
@@ -14,26 +15,7 @@ export class CheckoutScreen extends BaseScreen{
         await this.setValue(this.selectors.fullNameTextField, cardDetails.fullName);
         await this.setValue(this.selectors.cardNumberTextField, cardDetails.cardNumber);
 
-        const windowSize = await driver.getWindowRect();
-        const startSwipeX = windowSize.width / 2;
-        const startSwipeY = windowSize.height * 0.4;
-        const endSwipeY = windowSize.height * 0.2;
-
-        await browser.performActions([
-            {
-                type: 'pointer',
-                id: 'finger1',
-                parameters: { pointerType: 'touch' },
-                actions: [
-                    { type: 'pointerMove', x: startSwipeX, y: startSwipeY, duration: 500 },
-                    { type: 'pointerDown', button: 0 },
-                    { type: 'pause', duration: 500 }, // 1000 milliseconds pause, adjust as needed
-                    { type: 'pointerMove', x: startSwipeX, y: endSwipeY, duration: 500 },
-                    { type: 'pointerUp', button: 0 },
-                ],
-            },
-        ]);
-
+        await TouchActions.swipeUpFromMiddle();
 
         await this.setValue(this.selectors.expirationDateField, cardDetails.expirationDate);
         await this.setValue(this.selectors.securityCode, cardDetails.securityCode);
