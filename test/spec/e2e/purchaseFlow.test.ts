@@ -5,6 +5,7 @@ import { CartScreen } from "../../screens/cartScreen";
 import { CatalogScreen } from "../../screens/catalogScreen";
 import { CheckoutScreen } from "../../screens/checkoutScreen";
 import { LoginScreen } from "../../screens/loginScreen"
+import { LogoutScreen } from "../../screens/logoutScreen";
 import { OrderReviewScreen } from "../../screens/orderReviewScreen";
 import { ProductScreen } from "../../screens/productScreen";
 
@@ -14,9 +15,19 @@ let productScreen = new ProductScreen;
 let cartScreen = new CartScreen;
 let addressScreen =  new AddressScreen;
 let checkoutScreen = new CheckoutScreen;
+let logoutScreen: LogoutScreen;
 let orderReviewScreen = new OrderReviewScreen;
 
 describe('E2E Purchase Flow for the App', function(){
+
+    this.beforeEach(async function () {
+        loginScreen = new LoginScreen();
+        logoutScreen = new LogoutScreen();
+    });
+
+    this.afterEach(async function(){
+        logoutScreen.logout();
+    })
     it('E2E Purchase Flow', async function (){
         const addressDetails: AddressDetails = {
             fullName : "John",

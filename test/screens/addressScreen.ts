@@ -13,8 +13,17 @@ export class AddressScreen extends BaseScreen{
         toPaymentButton: '//android.widget.TextView[@text="To Payment"]',
 
     }
+    async navigateToPayment() {
+        await this.click(this.selectors.toPaymentButton);
+    }
 
     async enterAddressDetails(addressDetails: AddressDetails){
+        await this.fillMandatoryAddressDetails(addressDetails);
+        await this.navigateToPayment();
+    }
+
+    async fillMandatoryAddressDetails(addressDetails: AddressDetails) {
+
         await this.setValue(this.selectors.nameTextField, addressDetails.fullName);
         await this.setValue(this.selectors.address1TextField, addressDetails.address1);
 
@@ -24,10 +33,6 @@ export class AddressScreen extends BaseScreen{
         await this.setValue(this.selectors.stateTextField, addressDetails.stateName);
         await this.setValue(this.selectors.zipCodeTextField, addressDetails.zipCode);
         await this.setValue(this.selectors.countryTextField, addressDetails.countryName);
-
-        await this.click(this.selectors.toPaymentButton);
-
-
 
     }
 

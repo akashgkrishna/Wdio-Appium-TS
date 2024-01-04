@@ -5,10 +5,9 @@ export class TouchActions {
     private static readonly SWIPE_PERCENTAGES = {
         START_SWIPE_Y: 0.5,
         END_SWIPE_Y: 0.2,
-
     };
   
-    private static readonly PAUSE = 500;
+    private static readonly PAUSE_DURATION = 500;
 
     public static async swipeUpFromMiddle(): Promise<void> {
         const windowSize = await driver.getWindowRect();
@@ -26,7 +25,7 @@ export class TouchActions {
         .action('pointer', { parameters: { 'pointerType': 'touch' } })
         .move({ x: swipeCordinates.startX, y: swipeCordinates.startY })
         .down()
-        .pause(this.PAUSE)
+        .pause(this.PAUSE_DURATION)
         .move({ x: swipeCordinates.startX, y: swipeCordinates.endY })
         .up()
         .perform();
