@@ -3,4 +3,4 @@ export interface SwipeCordinates {
     startY: number;
     endX?: number;
     endY: number;
-  }
+  } 
