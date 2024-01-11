@@ -1,5 +1,7 @@
 import { AddressDetails } from "../../customTypes/addressDetails";
 import { CardDetails } from "../../customTypes/cardDetails";
+import { Logger } from "../../reporting/logger";
+// import { LoggerHelper } from "../../reporting/loggerHelper";
 import { AddressScreen } from "../../screens/addressScreen";
 import { CartScreen } from "../../screens/cartScreen";
 import { CatalogScreen } from "../../screens/catalogScreen";
@@ -18,16 +20,22 @@ let checkoutScreen = new CheckoutScreen;
 let logoutScreen: LogoutScreen;
 let orderReviewScreen = new OrderReviewScreen;
 
+const LOGGER = new Logger();
+// let loggerHelper : LoggerHelper;
+
 describe('E2E Purchase Flow for the App', function(){
 
-    this.beforeEach(async function () {
+    before(async function () {
         loginScreen = new LoginScreen();
         logoutScreen = new LogoutScreen();
+        // loggerHelper = new LoggerHelper({});
+        
     });
 
     this.afterEach(async function(){
         logoutScreen.logout();
     })
+    
     it('E2E Purchase Flow', async function (){
         const addressDetails: AddressDetails = {
             fullName : "John",
@@ -46,22 +54,17 @@ describe('E2E Purchase Flow for the App', function(){
             securityCode : 744
         }
 
+        // loggerHelper.info('From Logger helper')
+        LOGGER.info('From Custom Logger')
+
         await loginScreen.performLogin();
-
         await catalogScreen.selectProduct();
-
         await productScreen.addProductToCart();
-
         await catalogScreen.clickOnCart();
-        
         await cartScreen.clickOnProceedToCheckoutButton();
-
         await addressScreen.enterAddressDetails(addressDetails);
-
         await checkoutScreen.enterCardDetails(cardDetails);
-
         await orderReviewScreen.clickOnPlaceOrderButton();
-        
         await driver.pause(3000);
 
     })

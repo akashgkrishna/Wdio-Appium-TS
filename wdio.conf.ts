@@ -1,6 +1,11 @@
 import { Options } from '@wdio/types'
 import * as path from 'path';
-import { Logger } from './test/reporting/logger';
+// import { Logger } from './test/reporting/logger';
+// import fs from 'fs';
+
+// import { LoggerHelper } from './test/reporting/loggerHelper';
+// const logger = new Logger();
+// let logger = new Logger({ path: './logs/logs.log' });
 
 export const config: Options.Testrunner = {
     //
@@ -153,7 +158,11 @@ export const config: Options.Testrunner = {
             outputDir: 'allure-results',
             disableMochaHooks: true // Disable hooks data collection
         }],
-        Logger
+        // [
+        //     LoggerHelper, {
+        //         logFilePath: path.join(__dirname, 'logs', 'logs.log')
+        //     }
+        // ],
     ],
 
     // Options to be passed to Mocha.
@@ -187,7 +196,16 @@ export const config: Options.Testrunner = {
      * @param  {object} args     object that will be merged with the main configuration once worker is initialized
      * @param  {object} execArgv list of string arguments passed to the worker process
      */
-    // onWorkerStart: function (cid, caps, specs, args, execArgv) {
+    // onWorkerStart: function () {
+    //     logger.info('On Worker Start');
+    //     fs.writeFile('./logs/logs.log', '', (err) => {
+    //         if (err) {
+    //           logger.error('Error found', err);
+    //         } else {
+    //           logger.info('Log file cleared successfully.');
+    //           console.warn
+    //         }
+    //       });
     // },
     /**
      * Gets executed just after a worker process has exited.
@@ -215,8 +233,7 @@ export const config: Options.Testrunner = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+   
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
@@ -263,7 +280,17 @@ export const config: Options.Testrunner = {
     //         await browser.takeScreenshot();
     //     }
     // },
-
+    // afterTest: async function (test: any, { error, duration, passed }: any) {
+    //     if (passed) {
+    //         console.log(`Test ${test.title} passed in ${duration}ms.`);
+    //     } else {
+    //         if (error) {
+    //             console.log(`Test ${test.title} failed in ${duration}ms. Error: ${error.message}`);
+    //         } else {
+    //             console.log(`Test ${test.title} failed in ${duration}ms. No error message provided.`);
+    //         }
+    //     }
+    // },
 
     /**
      * Hook that gets executed after the suite has ended
