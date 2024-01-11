@@ -20,15 +20,18 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+
+    - name: Install Allure CLI (npm)
+      run: npm install -g allure-commandline
     
     - name: Run tests
       run: npm run bs
 
-    - name: Install Allure CLI
-      run: |
-        wget https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
-        tar -zxvf allure-2.25.0.tgz
-        export PATH=$PATH:$(pwd)/allure-2.25.0/bin
+    # - name: Install Allure CLI
+    #   run: |
+    #     wget https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
+    #     tar -zxvf allure-2.25.0.tgz
+    #     export PATH=$PATH:$(pwd)/allure-2.25.0/bin
 
     - name: Generate Allure report
       run: allure generate --clean ./allure-results
