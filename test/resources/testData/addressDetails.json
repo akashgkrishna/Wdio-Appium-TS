@@ -1,0 +1,8 @@
+{
+    "fullName" : "John",
+    "address1" : "Indranagar",
+    "cityName" : "Bangalore",
+    "stateName": "Karnataka",
+    "zipCode": 560036,
+    "countryName": "India"
+}

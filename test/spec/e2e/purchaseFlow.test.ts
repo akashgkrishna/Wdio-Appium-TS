@@ -9,6 +9,9 @@ import { LogoutScreen } from "../../screens/logoutScreen";
 import { OrderReviewScreen } from "../../screens/orderReviewScreen";
 import { ProductScreen } from "../../screens/productScreen";
 
+import jsonAddressDetails from '../../../test/resources/testData/addressDetails.json'
+import jsonCardDetails from '../../../test/resources/testData/cardDetails.json'
+
 let loginScreen = new LoginScreen;
 let catalogScreen =  new CatalogScreen;
 let productScreen = new ProductScreen;
@@ -20,49 +23,29 @@ let orderReviewScreen = new OrderReviewScreen;
 
 describe('E2E Purchase Flow for the App', function(){
 
-    this.beforeEach(async function () {
+    before(async function () {
         loginScreen = new LoginScreen();
         logoutScreen = new LogoutScreen();
+        
     });
 
     this.afterEach(async function(){
         logoutScreen.logout();
     })
+    
     it('E2E Purchase Flow', async function (){
-        const addressDetails: AddressDetails = {
-            fullName : "John",
-            address1 : "Indranagar",
-            cityName : "Bangalore",
-            stateName: "Karnataka",
-            zipCode: 560036,
-            countryName: "India"
 
-        }
-
-        const cardDetails: CardDetails = {
-            fullName : "John Carter",
-            cardNumber : "8474 8383 9384 947",
-            expirationDate : "02/27",
-            securityCode : 744
-        }
+        const addressDetails: AddressDetails = jsonAddressDetails;
+        const cardDetails: CardDetails = jsonCardDetails;
 
         await loginScreen.performLogin();
-
         await catalogScreen.selectProduct();
-
         await productScreen.addProductToCart();
-
         await catalogScreen.clickOnCart();
-        
         await cartScreen.clickOnProceedToCheckoutButton();
-
         await addressScreen.enterAddressDetails(addressDetails);
-
         await checkoutScreen.enterCardDetails(cardDetails);
-
         await orderReviewScreen.clickOnPlaceOrderButton();
-        
-        await driver.pause(3000);
 
     })
 })

@@ -1,7 +1,8 @@
 import { CardDetails } from "../customTypes/cardDetails";
 import { TouchActions } from "../gestures/touchActions";
+import { Logger } from "../reporting/logger";
 import { BaseScreen } from "./base/baseScreen";
-
+const LOGGER = new Logger();
 export class CheckoutScreen extends BaseScreen{
     private selectors = {
         fullNameTextField: '~Full Name* input field',
@@ -12,6 +13,7 @@ export class CheckoutScreen extends BaseScreen{
     }
 
     async enterCardDetails(cardDetails: CardDetails){
+        LOGGER.info('Entering Card details')
         await this.setValue(this.selectors.fullNameTextField, cardDetails.fullName);
         await this.setValue(this.selectors.cardNumberTextField, cardDetails.cardNumber);
 

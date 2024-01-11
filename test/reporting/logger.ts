@@ -1,33 +1,31 @@
-import WDIOReporter from '@wdio/reporter';
-import winston, { Logger as WinstonLogger } from 'winston';
+import winston from 'winston';
 
-export class Logger extends WDIOReporter {
-  private logger: WinstonLogger;
-  private totalSpecs = 0;
-  private totalTests = 0;
-  private passedTests = 0;
-  private failedTests = 0;
-  private skippedTests = 0;
-  private runnerCount = 0;
+export class Logger{
 
-  constructor(options: any) {
-    super(options); // Pass options to the superclass constructor
+
+  private logger: winston.Logger;
+
+  constructor() {
 
     this.logger = winston.createLogger({
       transports: [
+        new winston.transports.File({
+          filename: './logs/logs.log',
+          level: process.env.LOG_LEVEL || 'info' || 'error',
+        }),
         new winston.transports.Console({
           level: process.env.LOG_LEVEL || 'info',
           handleExceptions: true,
           format: winston.format.printf(({ level, message }) => {
             const logLevel = winston.format.colorize().colorize(level, `${level.toUpperCase()}`);
-            return `[${logLevel}]: ${message}`; // Exclude the timestamp from the log output
+            return `[${logLevel}]: ${message}`;
           })
         })
       ]
     });
 
     this.logger.on("error", (error: Error) => {
-      this.emit("error", error);
+      this.logger.error(`An error occurred: ${error.message}`);
     });
   }
 
@@ -35,52 +33,12 @@ export class Logger extends WDIOReporter {
     this.logger.log(level, message);
   }
 
-  info(message: string) {
-    this.logger.info(message);
+  info(message: string){
+    this.log('info',message);
   }
 
-  error(message: string) {
-    this.logger.error(message);
+  error(message: string, error: Error) {
+    this.logger.error(`${message}: ${error.stack || error.message}`, message);
   }
 
-  onRunnerStart(runner: any) {
-    this.runnerCount++;
-    this.log('info', `Execution of ${runner.cid} workers started`);
-  }
-
-  onTestPass() {
-    this.passedTests++;
-    this.totalTests++;
-  }
-
-  onTestFail() {
-    this.failedTests++;
-    this.totalTests++;
-  }
-
-  onTestSkip() {
-    this.skippedTests++;
-    this.totalTests++;
-  }
-
-  onSuiteStart() {
-    this.totalSpecs++;
-  }
-
-  onRunnerEnd() {
-    this.runnerCount--;
-
-    if (this.runnerCount === 0) {
-      this.logSummary();
-    }
-  }
-
-  logSummary() {
-    this.log('info', `
-      Total tests      : ${this.totalTests} 
-      Passed tests     : ${this.passedTests} 
-      Failed tests     : ${this.failedTests} 
-      Skipped tests    : ${this.skippedTests} 
-    `);
-  }
 }
