@@ -3,7 +3,6 @@ import * as path from 'path';
 // import { Logger } from './test/reporting/logger';
 // import fs from 'fs';
 
-// import { LoggerHelper } from './test/reporting/loggerHelper';
 // const logger = new Logger();
 // let logger = new Logger({ path: './logs/logs.log' });
 
@@ -158,11 +157,6 @@ export const config: Options.Testrunner = {
             outputDir: 'allure-results',
             disableMochaHooks: true // Disable hooks data collection
         }],
-        // [
-        //     LoggerHelper, {
-        //         logFilePath: path.join(__dirname, 'logs', 'logs.log')
-        //     }
-        // ],
     ],
 
     // Options to be passed to Mocha.
@@ -203,7 +197,7 @@ export const config: Options.Testrunner = {
     //           logger.error('Error found', err);
     //         } else {
     //           logger.info('Log file cleared successfully.');
-    //           console.warn
+    //           logger.error
     //         }
     //       });
     // },

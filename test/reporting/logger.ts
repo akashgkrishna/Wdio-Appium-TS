@@ -1,9 +1,7 @@
-// import WDIOReporter from '@wdio/reporter';
 import winston from 'winston';
 
 export class Logger{
 
-  // private runnerCount = 0;
 
   private logger: winston.Logger;
 
@@ -41,11 +39,6 @@ export class Logger{
 
   error(message: string, error: Error) {
     this.logger.error(`${message}: ${error.stack || error.message}`, message);
-  }
-  
-  onRunnerStart(runner: any) {
-    // this.runnerCount++;
-    this.log('info', `Execution of ${runner.cid} workers started`);
   }
 
 }

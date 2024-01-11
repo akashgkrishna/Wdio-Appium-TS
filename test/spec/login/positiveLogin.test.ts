@@ -31,7 +31,7 @@ describe('Login to app', function () {
 
     });
 
-    it('Login with valid credentials1', async function () {
+    it('Login with valid credentials making it fail', async function () {
         await leftPanel.clickMenuButton();
 
         await loginScreen.performLogin();

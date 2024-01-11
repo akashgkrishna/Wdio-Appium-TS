@@ -1,7 +1,9 @@
 import { AddressDetails } from "../customTypes/addressDetails";
 import { TouchActions } from "../gestures/touchActions";
+import { Logger } from "../reporting/logger";
 import { BaseScreen } from "./base/baseScreen";
 
+const LOGGER = new Logger();
 export class AddressScreen extends BaseScreen{
     private selectors = {
         nameTextField : '~Full Name* input field',
@@ -18,6 +20,7 @@ export class AddressScreen extends BaseScreen{
     }
 
     async enterAddressDetails(addressDetails: AddressDetails){
+        LOGGER.info('Entering Address');
         await this.fillMandatoryAddressDetails(addressDetails);
         await this.navigateToPayment();
     }

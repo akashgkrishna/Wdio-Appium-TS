@@ -1,7 +1,9 @@
+import { Logger } from '../reporting/logger';
 import { BaseScreen } from './base/baseScreen';
 import {LeftPanel } from './common/LeftPanel';
 import { XpathUtil } from './common/xpathUtil';
 
+const LOGGER = new Logger();
 export class LoginScreen extends BaseScreen{
     private selectors = {
         loginCred: '//android.widget.TextView[@text="bob@example.com"]',
@@ -27,6 +29,7 @@ export class LoginScreen extends BaseScreen{
     }
 
     async performLogin() {
+        LOGGER.info('Logging in to the application')
         await this.leftPanel.clickMenuButton();
         await this.leftPanel.clickLoginMenuButton();
         await this.enterLoginCredentials();
