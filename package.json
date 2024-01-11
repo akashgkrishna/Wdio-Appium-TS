@@ -18,6 +18,7 @@
     "test": "npm run wdio && npm run allure",
     "single": "wdio run ./wdio.conf.ts --spec test/spec/e2e/purchaseFlow.test.ts",
     "bs": "wdio run ./config/bs.conf.ts --spec test/spec/logout/positiveLogout.test.ts",
-    "allure": "allure generate --clean ./allure-results && allure open"
+    "allure": "allure generate --clean ./allure-results && allure open",
+    "allure-action": "allure generate --clean ./allure-results"
   }
 }

@@ -3,7 +3,7 @@ name: WebdriverIO Tests
 on:
   push:
     branches:
-      - main
+      - krishna/wip
 
 jobs:
   test:
@@ -24,8 +24,11 @@ jobs:
     - name: Run tests
       run: npm run bs
 
-    - name: Upload Allure Report as Artifact
+    - name: Generate Allure report
+      run: npm run allure-action
+
+    - name: Archive Allure report
       uses: actions/upload-artifact@v4
       with:
-        name: allure-results
-        path: ./allure-results
+        name: allure-report
+        path: allure-report
