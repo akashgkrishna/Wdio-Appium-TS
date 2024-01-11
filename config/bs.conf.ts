@@ -1,4 +1,3 @@
-import { Logger } from '../test/reporting/logger';
 exports.config = {
     user: process.env.BROWSERSTACK_USERNAME || 'elastictest_IEsUKn',
     key: process.env.BROWSERSTACK_ACCESS_KEY || '96tSpGcY9aYpcdQWPuWD',
