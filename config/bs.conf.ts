@@ -33,4 +33,10 @@ exports.config = {
       '/Users/testvagrant/Documents/Krishna/WDIO/TS_PRAC_WDIO/test/spec/logout/positiveLogout.test.ts'
   ],
   logLevel: 'info',
+  reporters: [
+    ['allure', {
+        outputDir: 'allure-results',
+        disableMochaHooks: true // Disable hooks data collection
+    }],
+ ],
 }
