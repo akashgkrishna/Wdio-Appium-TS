@@ -30,7 +30,7 @@ describe('E2E Purchase Flow for the App', function(){
     });
 
     this.afterEach(async function(){
-        logoutScreen.logout();
+        await logoutScreen.logout();
     })
     
     it('E2E Purchase Flow', async function (){

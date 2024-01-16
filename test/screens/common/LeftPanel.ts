@@ -1,5 +1,4 @@
 import { BaseScreen } from "../base/baseScreen";
-
 export class LeftPanel extends BaseScreen{
     private selectors = {
         menuButton: '//android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView',

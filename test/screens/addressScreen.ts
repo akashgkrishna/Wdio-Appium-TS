@@ -1,6 +1,6 @@
 import { AddressDetails } from "../customTypes/addressDetails";
 import { TouchActions } from "../gestures/touchActions";
-import { Logger } from "../reporting/logger";
+import { Logger } from "../customLogger/logger";
 import { BaseScreen } from "./base/baseScreen";
 
 const LOGGER = new Logger();

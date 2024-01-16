@@ -8,7 +8,7 @@ exports.config = {
         {
           app: 'bs://aa25b129c9b06533674b464fd7ef540baee887cd',
           // buildIdentifier: "${DATE_TIME}",
-          browserstackLocal: true
+          browserstackLocal: false
         },
       ]
     ],
@@ -32,5 +32,11 @@ exports.config = {
     specs: [
       '/Users/testvagrant/Documents/Krishna/WDIO/TS_PRAC_WDIO/test/spec/logout/positiveLogout.test.ts'
   ],
-  logLevel: 'info',
+  logLevel: 'silent',
+  reporters: [
+    ['allure', {
+        outputDir: 'allure-results',
+        disableMochaHooks: true // Disable hooks data collection
+    }],
+ ],
 }

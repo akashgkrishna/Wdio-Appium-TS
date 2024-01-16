@@ -1,4 +1,4 @@
-import { Logger } from '../reporting/logger';
+import { Logger } from '../customLogger/logger';
 import { BaseScreen } from './base/baseScreen';
 import {LeftPanel } from './common/LeftPanel';
 import { XpathUtil } from './common/xpathUtil';
