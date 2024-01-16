@@ -1,8 +1,10 @@
+import { Logger } from '../../customLogger/logger';
 import { LoginScreen }from '../../screens/loginScreen';
 import { LogoutScreen } from '../../screens/logoutScreen';
 
 let loginScreen: LoginScreen;
 let logoutScreen: LogoutScreen;
+const LOGGER = new Logger()
 
 describe('Login to app negative', function () {
     before(async function () {
@@ -11,17 +13,16 @@ describe('Login to app negative', function () {
     });
 
     this.afterEach(async function(){
-        logoutScreen.logout();
+        await logoutScreen.logout();
     })
 
     it('Login with invalid credentials', async function () {
+        LOGGER.info('Logging with invalid credentials');
         let userName = "Invalid Credentials";
         let password = "Invalid Credentials;"
         let errorMsg = "Provided credentials do not match any user in this service.";
-
+        
         await loginScreen.enterInvalidCredentials(userName, password);
-
-        await driver.pause(3000);
 
         const isErrorMessageDisplayed = await loginScreen.isErrorMessageDisplayed(errorMsg)
         if (!isErrorMessageDisplayed) {
