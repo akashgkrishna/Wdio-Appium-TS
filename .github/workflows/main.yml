@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - krishna/wip
+  workflow_dispatch:
 
 jobs:
   test:
