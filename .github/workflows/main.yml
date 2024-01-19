@@ -1,9 +1,12 @@
 name: WebdriverIO Tests
 
 on:
+  schedule:
+    - cron: */5 * * * *
   push:
     branches:
       - krishna/wip
+      - main
   workflow_dispatch:
 
 jobs:
