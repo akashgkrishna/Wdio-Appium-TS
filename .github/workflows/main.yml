@@ -2,7 +2,7 @@ name: WebdriverIO Tests
 
 on:
   schedule:
-    - cron: */5 * * * *
+    - cron: '*/3 * * * *'
   push:
     branches:
       - krishna/wip
