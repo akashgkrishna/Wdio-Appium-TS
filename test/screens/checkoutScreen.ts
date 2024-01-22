@@ -22,7 +22,7 @@ export class CheckoutScreen extends BaseScreen{
         await this.setValue(this.selectors.expirationDateField, cardDetails.expirationDate);
         await this.setValue(this.selectors.securityCode, cardDetails.securityCode);
 
-        await this.click(this.selectors.reviewOrderButton);
-        await this.click(this.selectors.reviewOrderButton);
+        await this.doubleClick(this.selectors.reviewOrderButton);
+        
     }
 }

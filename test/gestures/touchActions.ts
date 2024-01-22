@@ -30,4 +30,21 @@ export class TouchActions {
         .up()
         .perform();
     }
-  }
+
+    // TODO need to remove this later
+    // public static async doubleTapOnElement(locator: string): Promise<void> {
+    //   const element = $(locator)
+    //   const xLocation = await element.getLocation('x');
+    //   const yLocation = await element.getLocation('y')
+      
+    //   await browser
+    //     .action('pointer', { parameters: { 'pointerType': 'touch' } })
+    //     .move({ x: xLocation, y: yLocation })
+    //     .down()
+    //     .up()
+    //     .pause(500)
+    //     .down()
+    //     .up()
+    //     .perform();
+    // }
+}

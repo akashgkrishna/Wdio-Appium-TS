@@ -1,5 +1,4 @@
 import { AddressDetails } from "../customTypes/addressDetails";
-import { TouchActions } from "../gestures/touchActions";
 import { Logger } from "../customLogger/logger";
 import { BaseScreen } from "./base/baseScreen";
 
@@ -29,11 +28,10 @@ export class AddressScreen extends BaseScreen{
 
         await this.setValue(this.selectors.nameTextField, addressDetails.fullName);
         await this.setValue(this.selectors.address1TextField, addressDetails.address1);
-
-        await TouchActions.swipeUpFromMiddle();
-        
+        await this.swipeUpTillElementFound(this.selectors.cityTextField);
         await this.setValue(this.selectors.cityTextField, addressDetails.cityName);
         await this.setValue(this.selectors.stateTextField, addressDetails.stateName);
+        await this.swipeUpTillElementFound(this.selectors.zipCodeTextField);
         await this.setValue(this.selectors.zipCodeTextField, addressDetails.zipCode);
         await this.setValue(this.selectors.countryTextField, addressDetails.countryName);
 

@@ -4,19 +4,26 @@ import { LogoutScreen } from '../../screens/logoutScreen';
 
 let loginScreen: LoginScreen;
 let logoutScreen: LogoutScreen;
+let specName = 'Negative Login Flow'
 const LOGGER = new Logger()
 
-describe('Login to app negative', function () {
+describe(specName, function () {
     before(async function () {
         loginScreen = new LoginScreen();
         logoutScreen = new LogoutScreen();
+        LOGGER.info(`Spec Name: ${specName}`);
     });
+    
+    this.beforeEach(async function () {
+        LOGGER.info(`Test Name: ${this.currentTest?.title}`);
+    })
 
     this.afterEach(async function(){
         await logoutScreen.logout();
     })
 
     it('Login with invalid credentials', async function () {
+        
         LOGGER.info('Logging with invalid credentials');
         let userName = "Invalid Credentials";
         let password = "Invalid Credentials;"

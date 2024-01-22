@@ -35,7 +35,7 @@ export class LoginScreen extends BaseScreen{
         await this.enterLoginCredentials();
         await this.clickOnLoginButton();
     }
-
+    
     async clickGoShoppingButton() {
         await this.click(this.selectors.goShoppingButton);
     }

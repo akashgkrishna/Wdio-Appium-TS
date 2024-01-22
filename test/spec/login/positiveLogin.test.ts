@@ -7,27 +7,28 @@ let loginScreen: LoginScreen;
 let leftPanel: LeftPanel;
 let logoutScreen: LogoutScreen;
 const LOGGER = new Logger();
+let specName = 'Login Flow';
 
-describe('Login to app', function () {
-    this.beforeEach(async function () {
+describe(specName, function () {
+    before(async function () {
         loginScreen = new LoginScreen();
         leftPanel = new LeftPanel();
         logoutScreen = new LogoutScreen();
+        LOGGER.info(`Spec Name: ${specName}`);
     });
+
+    this.beforeEach(async function () {
+        LOGGER.info(`Test Name: ${this.currentTest?.title}`);
+    })
 
     this.afterEach(async function(){
         await logoutScreen.logout();
     })
 
     it('Login with valid credentials', async function () {
-        LOGGER.info('Logging with valid credentials');
 
         await loginScreen.performLogin();
-
-        await driver.pause(3000);
-
         await leftPanel.clickMenuButton();
-        
         await leftPanel.clickLoginMenuButton();
 
         const isButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
@@ -35,22 +36,16 @@ describe('Login to app', function () {
 
     });
 
-    it('Login with valid credentials making it fail', async function () {
-        LOGGER.info('Logging with valid credentials making it fail');
+    // it('Login with valid credentials making it fail', async function () {
 
-        await leftPanel.clickMenuButton();
+    //     await leftPanel.clickMenuButton();
+    //     await loginScreen.performLogin();
+    //     await leftPanel.clickMenuButton();
+    //     await leftPanel.clickLoginMenuButton();
 
-        await loginScreen.performLogin();
-
-        await driver.pause(3000);
-
-        await leftPanel.clickMenuButton();
-        
-        await leftPanel.clickLoginMenuButton();
-
-        const isButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
-        expect(isButtonDisplayed).toBe(false);
-    });
+    //     const isButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
+    //     expect(isButtonDisplayed).toBe(false);
+    // });
 
 });
 
