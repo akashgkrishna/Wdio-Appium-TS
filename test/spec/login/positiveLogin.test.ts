@@ -36,16 +36,16 @@ describe(specName, function () {
 
     });
 
-    // it('Login with valid credentials making it fail', async function () {
+    it('Login with valid credentials making it fail', async function () {
 
-    //     await leftPanel.clickMenuButton();
-    //     await loginScreen.performLogin();
-    //     await leftPanel.clickMenuButton();
-    //     await leftPanel.clickLoginMenuButton();
+        await leftPanel.clickMenuButton();
+        await loginScreen.performLogin();
+        await leftPanel.clickMenuButton();
+        await leftPanel.clickLoginMenuButton();
 
-    //     const isButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
-    //     expect(isButtonDisplayed).toBe(false);
-    // });
+        const isButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
+        expect(isButtonDisplayed).toBe(false);
+    });
 
 });
 

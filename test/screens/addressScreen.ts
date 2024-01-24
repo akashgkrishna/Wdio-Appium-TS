@@ -12,8 +12,8 @@ export class AddressScreen extends BaseScreen{
         zipCodeTextField: '~Zip Code* input field',
         countryTextField: '~Country* input field',
         toPaymentButton: '//android.widget.TextView[@text="To Payment"]',
-
     }
+    
     async navigateToPayment() {
         await this.click(this.selectors.toPaymentButton);
     }

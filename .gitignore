@@ -33,4 +33,9 @@ npm-debug.log*
 package-lock.json
 
 # apk file
+apps/
 *.apk
+
+*temp
+
+
