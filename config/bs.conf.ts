@@ -1,22 +1,21 @@
 exports.config = {
-    user: process.env.BROWSERSTACK_USERNAME || 'elastictest_IEsUKn',
-    key: process.env.BROWSERSTACK_ACCESS_KEY || '96tSpGcY9aYpcdQWPuWD',
+    user: process.env.BROWSERSTACK_USERNAME || 'elastic_ud0MjL',
+    key: process.env.BROWSERSTACK_ACCESS_KEY || 'VVPVCyumxmDCk8dxzVTW',
     hostname: 'hub.browserstack.com',
     services: [
       [
         'browserstack',
         {
-          app: 'bs://aa25b129c9b06533674b464fd7ef540baee887cd',
-          // buildIdentifier: "${DATE_TIME}",
+          app: 'bs://4060025275a54d85a1e3081b3e24e5b972cede67',
           browserstackLocal: false
         },
       ]
     ],
     capabilities: [{
       'bstack:options': {
-        deviceName: 'Samsung Galaxy S22 Ultra',
-        platformVersion: '12.0',
-        platformName: 'android',
+        deviceName: 'iPhone 14 Pro Max',
+        platformVersion: '16',
+        platformName: 'ios',
       }
     }, 
   ],
@@ -30,13 +29,13 @@ exports.config = {
     },
     maxInstances: 1,
     specs: [
-      '/Users/testvagrant/Documents/Krishna/WDIO/TS_PRAC_WDIO/test/spec/logout/positiveLogout.test.ts'
+      'test/spec/logout/positiveLogout.test.ts'
   ],
-  logLevel: 'silent',
+  logLevel: 'info',
   reporters: [
     ['allure', {
         outputDir: 'allure-results',
-        disableMochaHooks: true // Disable hooks data collection
+        disableMochaHooks: true // Disable hooks 
     }],
  ],
 }

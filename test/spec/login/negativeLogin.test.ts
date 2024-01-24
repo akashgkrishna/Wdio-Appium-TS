@@ -1,6 +1,7 @@
 import { Logger } from '../../customLogger/logger';
 import { LoginScreen }from '../../screens/loginScreen';
 import { LogoutScreen } from '../../screens/logoutScreen';
+import { expect } from 'chai';
 
 let loginScreen: LoginScreen;
 let logoutScreen: LogoutScreen;
@@ -14,7 +15,7 @@ describe(specName, function () {
         LOGGER.info(`Spec Name: ${specName}`);
     });
     
-    this.beforeEach(async function () {
+    beforeEach(async function () {
         LOGGER.info(`Test Name: ${this.currentTest?.title}`);
     })
 
@@ -31,10 +32,9 @@ describe(specName, function () {
         
         await loginScreen.enterInvalidCredentials(userName, password);
 
-        const isErrorMessageDisplayed = await loginScreen.isErrorMessageDisplayed(errorMsg)
-        if (!isErrorMessageDisplayed) {
-            throw new Error('Error message not displayed for invalid login.');
-        }
+        const isErrorMessageDisplayed = await loginScreen.isErrorMessageDisplayed(errorMsg);
+        expect(isErrorMessageDisplayed).to.be.true;
+        
     });
 });
 
