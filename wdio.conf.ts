@@ -5,8 +5,31 @@ import * as path from 'path';
 
 // const logger = new Logger();
 // let logger = new Logger({ path: './logs/logs.log' });
-
+// const ANDROID_CAPABILITIES= [
+//     {
+//         platformName: 'Android',
+//     // browserName: 'Chrome',
+//     'appium:deviceName': 'New_API_33',
+//     'appium:platformVersion': '13',
+//     'appium:automationName': 'UiAutomator2',
+//     // From root go to this path so always come to this
+//     // Ex: /Users/testvagrant/Desktop/Better/WDIO/app/android/MyDemoApp.apk
+//     'appium:app': path.join(process.cwd(), './apps/android/Android-MyDemoAppRN.1.3.0.build-244.apk'),
+//     // 'appium:noReset': true
+//     // 'appium:fullReset': true
+//     },
+// ];
+// const IOS_CAPABILITIES = [
+//     {
+//         platformName: 'iOS',
+//         'appium:deviceName': 'iPhone SE (3rd generation)',
+//         'appium:platformVersion': '17.2',
+//         'appium:automationName': 'XCUITest',
+//         'appium:app': path.join(process.cwd(), './apps/ios/MyRNDemoApp.app'), // Adjust the path to your iOS app
+//     },
+// ];
 export const config: Options.Testrunner = {
+    
     //
     // ====================
     // Runner Configuration
@@ -77,11 +100,12 @@ export const config: Options.Testrunner = {
         'appium:automationName': 'UiAutomator2',
         // From root go to this path so always come to this
         // Ex: /Users/testvagrant/Desktop/Better/WDIO/app/android/MyDemoApp.apk
-        'appium:app': path.join(process.cwd(), './apps/android/MyDemoApp.apk'),
+        'appium:app': path.join(process.cwd(), './apps/android/Android-MyDemoAppRN.1.3.0.build-244.apk'),
         // 'appium:noReset': true
         // 'appium:fullReset': true
-    }],
-
+    },
+],
+    // capabilities: process.env.PLATFORM === "ANDROID" ? ANDROID_CAPABILITIES : IOS_CAPABILITIES,
     //
     // ===================
     // Test Configurations
@@ -89,7 +113,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:

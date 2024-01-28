@@ -19,12 +19,12 @@
   "scripts": {
     "wdio": "wdio run ./wdio.conf.ts",
     "test": "npm run wdio && npm run allure",
-    "single": "wdio run ./wdio.conf.ts --spec /Users/testvagrant/Documents/Krishna/WDIO/TS_PRAC_WDIO/test/spec/login/positiveLogin.test.ts",
+    "single": "wdio run ./wdio.conf.ts --spec test/spec/cart/cart.test.ts",
     "bs": "wdio run ./config/bs.conf.ts --spec test/spec/logout/positiveLogout.test.ts",
     "allure": "allure generate --clean ./allure-results && allure open",
     "allure-action": "allure generate --clean ./allure-results",
 
-    "ios": "wdio run ./config/ios.conf.ts --spec test/spec/login/positiveLogin.test.ts",
+    "ios": "wdio run ./config/ios.conf.ts --platform ios --spec test/spec/logout/positiveLogout.test.ts",
     "android": "npm run run-test -- ./config/android.conf.ts",
     "wdio-platform": "npm run run-test --"
   }
