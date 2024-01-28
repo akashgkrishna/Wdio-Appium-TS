@@ -1,4 +1,4 @@
-import { AddressDetails } from "../customTypes/addressDetails";
+import { AddressDetails } from "../resources/customTypes/addressDetails";
 import { Logger } from "../customLogger/logger";
 import { BaseScreen } from "./base/baseScreen";
 

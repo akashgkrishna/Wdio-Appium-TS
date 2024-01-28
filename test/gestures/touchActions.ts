@@ -1,4 +1,4 @@
-import { SwipeCordinates } from "../customTypes/swipeCordinates";
+import { SwipeCordinates } from "../resources/customTypes/swipeCordinates";
 
 export class TouchActions {
 
