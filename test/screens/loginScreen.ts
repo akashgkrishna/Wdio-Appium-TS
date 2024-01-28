@@ -20,6 +20,7 @@ export class LoginScreen extends BaseScreen{
     async getErrorMessageText(selector: string, value: string): Promise<string>{
         return XpathUtil.getPlaceholderReplaced(selector,value );
     }
+    
     async enterLoginCredentials() {
         await this.click(this.selectors.loginCred);
     }

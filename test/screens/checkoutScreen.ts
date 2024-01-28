@@ -1,4 +1,4 @@
-import { CardDetails } from "../customTypes/cardDetails";
+import { CardDetails } from "../resources/customTypes/cardDetails";
 import { TouchActions } from "../gestures/touchActions";
 import { Logger } from "../customLogger/logger";
 import { BaseScreen } from "./base/baseScreen";
@@ -12,6 +12,7 @@ export class CheckoutScreen extends BaseScreen{
         reviewOrderButton: '//android.widget.TextView[@text="Review Order"]',
     }
 
+    
     async enterCardDetails(cardDetails: CardDetails){
         LOGGER.info('Entering Card details')
         await this.setValue(this.selectors.fullNameTextField, cardDetails.fullName);
