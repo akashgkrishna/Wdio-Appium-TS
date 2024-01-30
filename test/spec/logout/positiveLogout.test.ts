@@ -17,5 +17,6 @@ describe(specName, function(){
 
     it('Logout positive flow', async function(){
         await logoutUserFlow.performLogout();
+
     })
 })

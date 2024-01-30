@@ -1,7 +1,7 @@
 import { Logger } from "../customLogger/logger";
 import { LoginCredentials } from "../resources/customTypes/loginCredentials";
 import { BaseScreen } from "../screens/base/baseScreen";
-import { LeftPanel } from "../screens/common/LeftPanel";
+import { LeftPanel } from "../screens/common/leftPanel";
 import { Header } from "../screens/common/header";
 import { LoginScreen } from "../screens/loginScreen";
 
