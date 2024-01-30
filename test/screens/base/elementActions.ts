@@ -25,17 +25,21 @@ export class ElementActions {
 
     public static async isDisplayed(element: WebdriverIO.Element): Promise<boolean> {
         try {
-            browser.waitUntil(
-                function() {
-                    return element.waitForDisplayed();
+            await browser.waitUntil(
+                async () => {
+                    try {
+                        return await element.isDisplayed();
+                    } catch (error) {
+                        return false;
+                    }
                 },
                 {
                     timeout: this.DEFAULT_TIMEOUT,
+                    timeoutMsg: 'Element did not display in the specified time'
                 }
             );
-            return await element.isDisplayed();
-        } catch (error: any)
-        {
+            return true;
+        } catch (error: any) {
             LOGGER.error('Error while checking if element is displayed: \n', error);
             return false;
         }
