@@ -3,9 +3,9 @@ import { XpathUtil } from "./common/xpathUtil";
 
 export class CatalogScreen extends BaseScreen{
     private selectors = {
-        productItem : 
-            '//android.widget.TextView[@content-desc="store item text" and @text="##PLACEHOLDER##"]',
+        productItem : '//android.widget.TextView[@content-desc="store item text" and @text="##PLACEHOLDER##"]',
         cart : '//android.view.ViewGroup[@content-desc="cart badge"]/android.widget.ImageView',
+        
     }
 
     async getProductItem(selector: string, value: string): Promise<string>{
@@ -27,7 +27,6 @@ export class CatalogScreen extends BaseScreen{
         } else {
             throw new Error(`Product element not found for value: ${value}`);
         }
-        // await this.click(element);
     }
 
 }

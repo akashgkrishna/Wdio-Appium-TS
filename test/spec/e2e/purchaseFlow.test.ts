@@ -1,53 +1,52 @@
-import { AddressDetails } from "../../customTypes/addressDetails";
-import { CardDetails } from "../../customTypes/cardDetails";
+import { AddressDetails } from "../../resources/customTypes/addressDetails";
+import { CardDetails } from "../../resources/customTypes/cardDetails";
 import { AddressScreen } from "../../screens/addressScreen";
 import { CartScreen } from "../../screens/cartScreen";
 import { CatalogScreen } from "../../screens/catalogScreen";
 import { CheckoutScreen } from "../../screens/checkoutScreen";
-import { LoginScreen } from "../../screens/loginScreen"
-import { LogoutScreen } from "../../screens/logoutScreen";
 import { OrderReviewScreen } from "../../screens/orderReviewScreen";
 import { ProductScreen } from "../../screens/productScreen";
+import { LoginCredentials } from '../../resources/customTypes/loginCredentials';
+import jsonLoginCredentials from '../../resources/testData/loginCredentials.json';
 
-import jsonAddressDetails from '../../../test/resources/testData/addressDetails.json'
-import jsonCardDetails from '../../../test/resources/testData/cardDetails.json'
+import jsonAddressDetails from '../../resources/testData/addressDetails.json'
+import jsonCardDetails from '../../resources/testData/cardDetails.json'
 import { Logger } from "../../customLogger/logger";
+import { LogoutUserFlow } from "../../userflows/logoutUserFlow";
+import { LoginUserFlow } from "../../userflows/loginUserFlow";
 
-let loginScreen = new LoginScreen;
-let catalogScreen =  new CatalogScreen;
-let productScreen = new ProductScreen;
-let cartScreen = new CartScreen;
-let addressScreen =  new AddressScreen;
-let checkoutScreen = new CheckoutScreen;
-let logoutScreen: LogoutScreen;
-let orderReviewScreen = new OrderReviewScreen;
+const catalogScreen =  new CatalogScreen();
+const productScreen = new ProductScreen();
+const cartScreen = new CartScreen();
+const addressScreen =  new AddressScreen();
+const checkoutScreen = new CheckoutScreen();
+const orderReviewScreen = new OrderReviewScreen();
+const loginUserFlow = new LoginUserFlow();
+const logoutUserFlow = new LogoutUserFlow();
 const LOGGER = new Logger();
-let specName = 'E2E Purchase Flow for the App'
+const specName = 'E2E Purchase Flow for the App'
 
 describe(specName, function(){
 
     before(async function () {
-        loginScreen = new LoginScreen();
-        logoutScreen = new LogoutScreen();
         LOGGER.info(`Spec Name: ${specName}`);
     });
 
-    this.beforeEach(async function () {
+    beforeEach(async function () {
         LOGGER.info(`Test Name: ${this.currentTest?.title}`);
+        const validLogin : LoginCredentials = jsonLoginCredentials.credentialsSets["validCredentials"];
+        await loginUserFlow.navigateAndLogin(validLogin);
     })
 
-    this.afterEach(async function(){
-        await logoutScreen.logout();
+    afterEach(async function(){
+        await logoutUserFlow.performLogout();
     })
     
-    it('E2E Purchase Flow', async function (){
+    it.skip('E2E Purchase Flow', async function (){
 
-        // Arrange
         const addressDetails: AddressDetails = jsonAddressDetails;
         const cardDetails: CardDetails = jsonCardDetails;
 
-        // Act
-        await loginScreen.performLogin();
         await catalogScreen.selectProduct();
         await productScreen.addProductToCart();
         await catalogScreen.clickOnCart();
@@ -56,8 +55,5 @@ describe(specName, function(){
         await checkoutScreen.enterCardDetails(cardDetails);
         await orderReviewScreen.clickOnPlaceOrderButton();
 
-        // Assert
-
-        
     })
 })

@@ -1,15 +1,12 @@
 import { BaseScreen } from "../base/baseScreen";
 export class LeftPanel extends BaseScreen{
     private selectors = {
-        menuButton: '//android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView',
         loginMenuButton: '~menu item log in',
-        logoutMenuButton: '~menu item log out'
+        logoutMenuButton: '~menu item log out',
+        catalogMenuButton: '//android.widget.TextView[@text="Catalog"]',
+        popupLogoutButton: '//android.widget.Button[@resource-id="android:id/button1"]'
 
     };
-
-    async clickMenuButton() {
-        await this.click(this.selectors.menuButton);
-    }
 
     async clickLoginMenuButton() {
         await this.click(this.selectors.loginMenuButton);
@@ -17,5 +14,13 @@ export class LeftPanel extends BaseScreen{
 
     async clickLogoutMenuButton() {
         await this.click(this.selectors.logoutMenuButton);
+    }
+
+    async clickOnCatalogueButton(){
+        await this.click(this.selectors.catalogMenuButton);
+    }
+
+    async clickOnPopupLogoutButton(){
+        await this.click(this.selectors.popupLogoutButton);
     }
 }
