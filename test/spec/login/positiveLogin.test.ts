@@ -34,9 +34,12 @@ describe(specName, function () {
         await loginUserFlow.navigateToLoginScreen();
         await loginUserFlow.performLogin(validLogin);
 
+        await loginUserFlow.navigateToLoginScreen();
+
         const isErrorMessageDisplayed = await loginScreen.isErrorMessageDisplayed(noItemsMessage);
         expect(isErrorMessageDisplayed).to.be.true;
-        const isGoShoppingButtonDisplayed = loginScreen.isGoShoppingButtonDisplayed;
+
+        const isGoShoppingButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
         expect(isGoShoppingButtonDisplayed).to.be.true;
 
     });

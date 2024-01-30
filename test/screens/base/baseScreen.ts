@@ -65,4 +65,14 @@ export class BaseScreen {
         }
        
     }
+
+    protected async isExisting(selector: string): Promise<boolean> {
+        try {
+            const element = $(selector)
+            return await element.isExisting();
+        } catch (error: any) {
+            LOGGER.error('Error while checking if element exists: \n', error);
+            return false;
+        }
+    }
 }

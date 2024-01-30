@@ -1,6 +1,6 @@
 import { Logger } from "../customLogger/logger";
 import { BaseScreen } from "../screens/base/baseScreen";
-import { LeftPanel } from "../screens/common/LeftPanel";
+import { LeftPanel } from "../screens/common/leftPanel";
 import { Header } from "../screens/common/header";
 
 const header = new Header();

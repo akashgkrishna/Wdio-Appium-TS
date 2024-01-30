@@ -4,19 +4,17 @@ import { LoginCredentials } from '../../resources/customTypes/loginCredentials';
 import jsonLoginCredentials from '../../resources/testData/loginCredentials.json';
 import jsonProductDetails from '../../resources/testData/productDetails.json';
 import { ProductDetails } from "../../resources/customTypes/productDetails";
-import { Header } from "../../screens/common/header";
 import { CartScreen } from "../../screens/cartScreen";
 import { LogoutUserFlow } from "../../userflows/logoutUserFlow";
 import { expect } from 'chai';
-import { ProductFlow } from "../../userflows/productFlow";
+import { CartFlow } from "../../userflows/cartFlow";
 
 const LOGGER = new Logger();
 let specName = 'Cart flow';
 const loginUserFlow = new LoginUserFlow();
 const logoutUserFlow = new LogoutUserFlow();
-const productFlow = new ProductFlow();
+const cartFlow = new CartFlow()
 const cartScreen = new CartScreen();
-const header = new Header();
 
 describe(specName, function () {
 
@@ -37,8 +35,7 @@ describe(specName, function () {
     it('Should add multiple products to the cart', async function () {
         const products: ProductDetails[] = jsonProductDetails;
 
-        await productFlow.addProductsToCart(products);
-        await header.clickOnCartButton();
+        await cartFlow.addProductsAndNavigateToCart(products);
         const cartProductDetails = await cartScreen.getAllProductDetails();
 
         const numberOfProductsInCart = await cartScreen.getNumberOfProductsInCart();
@@ -48,4 +45,23 @@ describe(specName, function () {
         expect(isAllProductsInCart, 'Product details in the cart are not as expected').to.be.true;
      });
 
+     it('Should Be Able to Empty Cart by Removing Products Individually', async function() {
+        const products: ProductDetails[] = jsonProductDetails;
+
+        await cartFlow.addProductsAndNavigateToCart(products);
+        await cartScreen.removeProductsFromCartIndividually();
+
+        const isCartEmpty = await cartScreen.isCartEmpty();
+        expect(isCartEmpty, 'Cart is not empty after removing all products').to.be.true;
+     });
+
+     it('Should be able to empty cart by reducing product quantity to zero', async function() {
+        const products: ProductDetails[] = jsonProductDetails;
+
+        await cartFlow.addProductsAndNavigateToCart(products);
+        await cartScreen.removeProductsFromCartByReducingQuantity();
+
+        const isCartEmpty = await cartScreen.isCartEmpty();
+        expect(isCartEmpty, 'Cart is not empty after removing all products').to.be.true;
+     })
 });

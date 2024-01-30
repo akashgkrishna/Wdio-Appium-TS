@@ -2,7 +2,7 @@ import { Logger } from "../customLogger/logger";
 import { ProductDetails } from "../resources/customTypes/productDetails";
 import { BaseScreen } from "../screens/base/baseScreen";
 import { CatalogScreen } from "../screens/catalogScreen";
-import { LeftPanel } from "../screens/common/LeftPanel";
+import { LeftPanel } from "../screens/common/leftPanel";
 import { Header } from "../screens/common/header";
 import { ProductScreen } from "../screens/productScreen";
 
