@@ -28,20 +28,22 @@ describe(specName, function () {
 
     it('Login with valid credentials', async function () {
 
+        // Arrange
         const validLogin : LoginCredentials = jsonLoginCredentials.credentialsSets["validCredentials"];
         const noItemsMessage = errorMessage.noItems;
         
+        // Act
         await loginUserFlow.navigateToLoginScreen();
         await loginUserFlow.performLogin(validLogin);
 
         await loginUserFlow.navigateToLoginScreen();
 
+        // Assert
         const isErrorMessageDisplayed = await loginScreen.isErrorMessageDisplayed(noItemsMessage);
         expect(isErrorMessageDisplayed).to.be.true;
 
         const isGoShoppingButtonDisplayed = await loginScreen.isGoShoppingButtonDisplayed();
         expect(isGoShoppingButtonDisplayed).to.be.true;
-
     });
 
 });

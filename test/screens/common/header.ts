@@ -13,8 +13,4 @@ export class Header extends BaseScreen{
     async clickOnHamburgerMenu() {
         await this.click(this.selectors.hamburgerMenu);
     }
-
-    async validateTotalPrice(){
-        
-    }
 }
