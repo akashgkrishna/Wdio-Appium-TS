@@ -74,7 +74,7 @@ export const config: Options.Testrunner = {
         // browserName: 'Chrome',
         'appium:deviceName': 'New_API_33',
         'appium:platformVersion': '13',
-        'appium:automationName': 'UiAutomator2',
+        'appium:automationName': 'UiAutomator2', 
         // From root go to this path so always come to this
         // Ex: /Users/testvagrant/Desktop/Better/WDIO/app/android/MyDemoApp.apk
         'appium:app': path.join(process.cwd(), './apps/android/Android-MyDemoAppRN.1.3.0.build-244.apk'),

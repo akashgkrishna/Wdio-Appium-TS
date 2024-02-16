@@ -7,12 +7,14 @@ export class CartScreen extends BaseScreen{
 
         proceedToCheckoutButton: `//android.widget.TextView[@text="Proceed To Checkout"]`,
         productRows: `//android.view.ViewGroup[@content-desc="product row"]`,
-        productName: `//android.view.ViewGroup[@content-desc="product row"]//android.widget.TextView[@content-desc="product label"]`,
-        productPrice: `//android.view.ViewGroup[@content-desc="product row"]//android.widget.TextView[@content-desc="product price"]`,
+        productName: `//android.widget.TextView[@content-desc="product label"]`,
+        productPrice: `//android.widget.TextView[@content-desc="product price"]`,
+        quantityNumber: `//android.view.ViewGroup[@content-desc="counter amount"]//android.widget.TextView`,
         removeIndividualProductButton: `(//android.view.ViewGroup[@content-desc="remove item"])[1]`,
         noItems: `//android.widget.TextView[@text="Oh no! Your cart is empty. Fill it up with swag to complete your purchase."]`,
         quantityMinus: `(//android.view.ViewGroup[@content-desc="counter minus button"])[1]/android.widget.ImageView`,
-        quanityPlus: `(//android.view.ViewGroup[@content-desc="counter plus button"])[##PLACEHOLDER##]/android.widget.ImageView`
+        quanityPlus: `(//android.view.ViewGroup[@content-desc="counter plus button"])[##PLACEHOLDER##]/android.widget.ImageView`,
+        totalItems: `~total number`
       
     }
 
@@ -28,14 +30,24 @@ export class CartScreen extends BaseScreen{
     async getAllProductDetails() {
         const productRows = await $$(this.selectors.productRows);
         const productDetails = [];
+    
         for (let i = 1; i <= productRows.length; i++) {
-            const labelXPath = `(${this.selectors.productName})[${i}]`;
-            const priceXPath = `(${this.selectors.productPrice})[${i}]`;
+            
+            const labelXPath = `(${this.selectors.productRows}${this.selectors.productName})[${i}]`;
+            const priceXPath = `(${this.selectors.productRows}${this.selectors.productPrice})[${i}]`;
+            const quantityXPath = `(${this.selectors.productRows}[${i}]${this.selectors.quantityNumber})`; 
+
             const labelText = await this.getText(labelXPath);
             let priceText = await this.getText(priceXPath);
+
+            await this.swipeUpTillElementFound(quantityXPath);
+
+            const quantityText = await this.getText(quantityXPath); 
             priceText = priceText.replace('$', '');
-            productDetails.push({ productName: labelText, productPrice: priceText });
+
+            productDetails.push({ productName: labelText, productPrice: priceText, quantity: quantityText });
         }
+    
         return productDetails;
     }
     
@@ -72,5 +84,35 @@ export class CartScreen extends BaseScreen{
         while(await this.isExisting(this.selectors.quantityMinus)){
             await this.click(this.selectors.quantityMinus);
         }
+    }
+
+    async getTotalQuantity(): Promise<number>{
+        const totalQuantity = (await this.getText(this.selectors.totalItems)).replace(' items', '');
+        return parseInt(totalQuantity);
+    }
+
+    async verifyCartProductQuantityDetails(productsInCart: any[],fetchedCartDetails: any[]): Promise<boolean> {
+        const result = fetchedCartDetails.every(product => {
+            const matchFound = productsInCart.some(cartProduct => {
+                // Convert quantity strings to numbers for comparison
+                const productQuantity = Number(product.quantity);
+                const cartProductQuantity = cartProduct.quantity;
+    
+                const match =
+                    cartProduct.productName === product.productName &&
+                    cartProductQuantity === productQuantity;
+                return match;
+            });
+            return matchFound;
+        });
+        return result;
+    }
+    
+    async getTotalNoOfProductsInCart(productsInCart: any[]): Promise<number> {
+        let total: number = 0;
+        for (const product of productsInCart) {
+            total += product.quantity;
+        }
+        return total;
     }
 }

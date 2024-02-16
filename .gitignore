@@ -13,6 +13,7 @@ logs/
 *.log
 *.tmp
 *.temp
+*temp
 
 # IDE specific files
 .vscode/
@@ -36,6 +37,6 @@ package-lock.json
 apps/
 *.apk
 
-*temp
+.DS_Store 
 
 

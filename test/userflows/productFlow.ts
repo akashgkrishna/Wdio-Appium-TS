@@ -27,4 +27,29 @@ export class ProductFlow extends BaseScreen{
             await this.navigateToCatalogueScreen();
         }
     }
+
+    async addProductsToCartWithQuantity(products: ProductDetails[]): Promise<{ productName: string; quantity: number }[]> {
+        const addedProducts = [];
+    
+        for (const product of products) {
+            const randomQuantity = Math.floor(Math.random() * 4) + 2;
+    
+            LOGGER.info(`Adding ${randomQuantity} of product ${product.productName} to the cart`);
+            await catalogScreen.clickOnProduct(product.productName);
+    
+            if (randomQuantity > 1) {
+                for (let i = 1; i < randomQuantity; i++) {
+                    await productScreen.clickOnQuantityPlusButton();
+                }
+            }
+            await productScreen.addProductToCart();
+            await this.navigateToCatalogueScreen();
+    
+            // Store the product name and quantity in the array
+            addedProducts.push({ productName: product.productName, quantity: randomQuantity });
+        }
+        LOGGER.info('All Products added to cart successfully');
+        return addedProducts;
+    }
+    
 }
