@@ -6,16 +6,16 @@ exports.config = {
       [
         'browserstack',
         {
-          app: 'bs://4060025275a54d85a1e3081b3e24e5b972cede67',
+          app: 'bs://3f4b2890956a33bdc490b131ce5b09e8eb1ee637',
           browserstackLocal: false
         },
       ]
     ],
     capabilities: [{
       'bstack:options': {
-        deviceName: 'iPhone 14 Pro Max',
-        platformVersion: '16',
-        platformName: 'ios',
+        deviceName: 'Google Pixel 7 Pro',
+        platformVersion: '13.0',
+        platformName: 'android',
       }
     }, 
   ],
@@ -29,7 +29,7 @@ exports.config = {
     },
     maxInstances: 1,
     specs: [
-      'test/spec/logout/positiveLogout.test.ts'
+      '../test/spec/*/*.test.ts'
   ],
   logLevel: 'info',
   reporters: [
