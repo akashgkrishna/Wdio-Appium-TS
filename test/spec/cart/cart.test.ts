@@ -52,6 +52,7 @@ describe(specName, function () {
         expect(isAllProductsInCart, 'Product details in the cart are not as expected').to.be.true;
      });
 
+
      it('Should Be Able to Empty Cart by Removing Products Individually', async function() {
         // Act
         await cartFlow.addProductsAndNavigateToCart(products);
@@ -61,6 +62,7 @@ describe(specName, function () {
         const isCartEmpty = await cartScreen.isCartEmpty();
         expect(isCartEmpty, 'Cart is not empty after removing all products').to.be.true;
      });
+
 
      it('Should be able to empty cart by reducing product quantity to zero', async function() {
         // Act
@@ -72,7 +74,8 @@ describe(specName, function () {
         expect(isCartEmpty, 'Cart is not empty after removing all products').to.be.true;
      });
 
-     it('Should be able to add product with quantity greater than one', async function() {
+
+     it.only('Should be able to add product with quantity greater than one', async function() {
         // Act
         const productsInCart = await productFlow.addProductsToCartWithQuantity(products);
         await header.clickOnCartButton();
@@ -86,6 +89,5 @@ describe(specName, function () {
         const totalQuantityAdded = cartScreen.getTotalNoOfProductsInCart(productsInCart);
         const totalAuantityInCart = cartScreen.getTotalQuantity();
         expect(await totalQuantityAdded, 'Total Quantity not matching').equal(await totalAuantityInCart);
-
      });
 });
